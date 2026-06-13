@@ -1,0 +1,14 @@
+{
+  "name": "demonix-website",
+  "version": "1.0.0",
+  "description": "DemoniX AI Shield - Privacy-first AI security scanner",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["ai", "security", "phishing", "scam"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
