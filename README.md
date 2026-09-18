@@ -1,37 +1,13 @@
-# DemoniX Landing Page
+# DemoniX website
 
-A minimalist landing page for DemoniX and AI Shield.
+The main DemoniX website introduces the company and its first product, [AI Shield](https://github.com/suryathe44/AI_shield). The homepage has separate paths for individuals and banks/fintech teams and links to the AI Shield web demo, offline Chrome extension instructions, and source code.
 
-## Files
+The extension runs local scans after a user click. The web demo has separate optional API, logging, and OCR workflows; the site describes that distinction. AI Shield is an advisory pilot, not a production security guarantee, and Chrome Web Store publication is pending.
 
-- `index.html` - page structure and copy
-- `styles.css` - responsive visual design
-- `script.js` - scanner panel interaction
+## Run locally
 
-## Run
+Open `index.html` in a browser, or run `node server.js` and visit `http://127.0.0.1:5175`.
 
-Open `index.html` in a browser, or run:
+## Deploy
 
-```bash
-node server.js
-```
-
-Then visit `http://127.0.0.1:5175`# DemoniX Landing Page
-
-A minimalist landing page for DemoniX and AI Shield.
-
-## Files
-
-- `index.html` - page structure and copy
-- `styles.css` - responsive visual design
-- `script.js` - scanner panel interaction
-
-## Run
-
-Open `index.html` in a browser, or run:
-
-```bash
-node server.js
-```
-
-Then visit `http://127.0.0.1:5175`
+The repository includes a Vercel configuration for `server.js`. Deploying this site is separate from publishing the AI Shield Chrome extension to the Chrome Web Store.
