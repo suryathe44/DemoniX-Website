@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="DemoniX builds practical, privacy-conscious security products. Explore AI Shield, an advisory checker for UPI, banking and phishing messages.">
+    <meta name="theme-color" content="#081323">
     <title>DemoniX | Security products people can understand</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -20,14 +18,15 @@
         <a href="#products">Products</a>
         <a href="#approach">Approach</a>
         <a href="#mission">Mission</a>
+        <a href="#feedback">Feedback</a>
       </nav>
-      <a class="header-cta" href="#products">Explore products</a>
+      <a class="header-cta" href="#products">Explore AI Shield <span aria-hidden="true">↗</span></a>
     </header>
 
     <main id="top">
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">DemoniX / Security products</p>
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> DemoniX / Security products</p>
           <h1>Make the safer choice before you act.</h1>
           <p class="hero-lede">
             DemoniX builds clear, privacy-conscious tools to help people recognize digital scams. AI Shield is our first product: a second look at suspicious UPI requests, messages and webpages.
@@ -126,6 +125,36 @@
         </div>
       </section>
 
+      <section class="feedback-section" id="feedback" aria-labelledby="feedback-title">
+        <div class="feedback-intro">
+          <p class="eyebrow">Help shape AI Shield</p>
+          <h2 id="feedback-title">Was the warning useful?</h2>
+          <p>Tell us what worked or felt confusing. Your feedback helps us improve the guidance for real people and future pilots.</p>
+          <p class="privacy-note">Please do not include UPI IDs, phone numbers, passwords, account details, or the original private message.</p>
+        </div>
+        <form class="feedback-form" id="feedback-form">
+          <label for="feedback-type">What are you giving feedback on?</label>
+          <select id="feedback-type" name="type" required>
+            <option value="" selected disabled>Choose one</option>
+            <option value="Missed a suspicious message">It missed something suspicious</option>
+            <option value="Raised a false alarm">It raised a false alarm</option>
+            <option value="Warning was unclear">The warning was unclear</option>
+            <option value="General suggestion">I have a suggestion</option>
+          </select>
+          <label for="feedback-clarity">Was the next step clear?</label>
+          <select id="feedback-clarity" name="clarity" required>
+            <option value="" selected disabled>Choose one</option>
+            <option value="Yes">Yes</option>
+            <option value="Partly">Partly</option>
+            <option value="No">No</option>
+          </select>
+          <label for="feedback-note">What should we improve? <span>(optional)</span></label>
+          <textarea id="feedback-note" name="note" rows="3" maxlength="500" placeholder="Describe the experience without private details"></textarea>
+          <button class="primary-button" type="submit">Continue to GitHub <span aria-hidden="true">↗</span></button>
+          <p class="form-help">Your answers stay in this browser until you continue. You will review the draft on GitHub before submitting; a GitHub account is needed.</p>
+        </form>
+      </section>
+
       <section class="cta-band">
         <div>
           <p class="eyebrow">Explore AI Shield</p>
@@ -140,7 +169,7 @@
         <strong>DemoniX</strong>
         <p>Practical, privacy-conscious security products.</p>
       </div>
-      <a href="https://github.com/suryathe44/AI_shield/issues" target="_blank" rel="noopener noreferrer">Product feedback</a>
+      <a href="#feedback">Product feedback</a>
     </footer>
 
     <script src="script.js"></script>
