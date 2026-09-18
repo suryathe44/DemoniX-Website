@@ -6,8 +6,8 @@ The extension runs local scans after a user click. The web demo has separate opt
 
 ## Run locally
 
-Open `index.html` in a browser, or run `node server.js` and visit `http://127.0.0.1:5175`.
+Run `npm start` and visit `http://127.0.0.1:5175`. The server serves only the homepage, stylesheet, and browser script.
 
 ## Deploy
 
-The repository includes a Vercel configuration for `server.js`. Deploying this site is separate from publishing the AI Shield Chrome extension to the Chrome Web Store.
+The site is deployed on Render at [demonix.site](https://demonix.site). For a Render web service, use `npm start` as the start command. The server listens on Render's `PORT` and on `0.0.0.0`. Point the custom domain at the Render service using the DNS records Render specifies for that service. Deploying this site is separate from publishing the AI Shield Chrome extension to the Chrome Web Store.

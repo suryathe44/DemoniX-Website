@@ -56,3 +56,12 @@ h1{font-size:40px;margin:0 0 12px}
   .nav{display:none}
   .feature-grid{flex-direction:column}
 }
+@media (max-width:480px){
+  .site-header{padding:16px 20px}
+  .main{padding:16px}
+  .hero{padding:0;gap:24px}
+  h1{font-size:clamp(2rem,9vw,2.5rem)}
+  .hero-actions,.trust-strip{flex-wrap:wrap}
+  .mission-band,.split-section,.solution-section{padding:12px 4px}
+  .footer{flex-wrap:wrap;gap:12px}
+}

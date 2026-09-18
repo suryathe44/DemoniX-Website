@@ -2,59 +2,53 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
-const root = __dirname;
 const port = process.env.PORT || 5175;
-
-const types = {
-  ".html": "text/html; charset=utf-8",
-  ".css": "text/css; charset=utf-8",
-  ".js": "application/javascript; charset=utf-8",
-  ".md": "text/markdown; charset=utf-8"
+const publicFiles = {
+  "/": ["index.html", "text/html; charset=utf-8"],
+  "/index.html": ["index.html", "text/html; charset=utf-8"],
+  "/styles.css": ["styles.css", "text/css; charset=utf-8"],
+  "/script.js": ["script.js", "application/javascript; charset=utf-8"]
 };
 
 const server = http.createServer((request, response) => {
+  if (request.method !== "GET" && request.method !== "HEAD") {
+    response.writeHead(405, { Allow: "GET, HEAD" });
+    response.end();
+    return;
+  }
+
+  let pathname;
   try {
-    const urlPath = decodeURIComponent(
-      new URL(request.url, `http://${request.headers.host}`).pathname
-    );
+    pathname = new URL(request.url, "http://localhost").pathname;
+  } catch {
+    response.writeHead(400);
+    response.end("Bad request");
+    return;
+  }
 
-    const requestPath =
-      urlPath === "/" ? "index.html" : urlPath.replace(/^[/\\]+/, "");
+  const asset = Object.hasOwn(publicFiles, pathname) ? publicFiles[pathname] : null;
+  if (!asset) {
+    response.writeHead(404);
+    response.end("Not found");
+    return;
+  }
 
-    const safePath = path
-      .normalize(requestPath)
-      .replace(/^(\.\.[/\\])+/, "");
-
-    const filePath = path.join(root, safePath);
-
-    // Prevent access outside the project directory
-    if (!filePath.startsWith(root)) {
-      response.writeHead(403);
-      response.end("Forbidden");
+  fs.readFile(path.join(__dirname, asset[0]), (error, content) => {
+    if (error) {
+      response.writeHead(500);
+      response.end("Server error");
       return;
     }
 
-    fs.readFile(filePath, (error, content) => {
-      if (error) {
-        response.writeHead(404);
-        response.end("Not found");
-        return;
-      }
-
-      response.writeHead(200, {
-        "Content-Type":
-          types[path.extname(filePath)] || "application/octet-stream"
-      });
-
-      response.end(content);
+    response.writeHead(200, {
+      "Content-Type": asset[1],
+      "Content-Length": content.length,
+      "X-Content-Type-Options": "nosniff"
     });
-  } catch (err) {
-    response.writeHead(400);
-    response.end("Bad request");
-  }
+    response.end(request.method === "HEAD" ? undefined : content);
+  });
 });
 
-// Render requires the web service to listen on 0.0.0.0
 server.listen(port, "0.0.0.0", () => {
   console.log(`DemoniX site running on 0.0.0.0:${port}`);
 });
