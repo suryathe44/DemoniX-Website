@@ -14,11 +14,20 @@ const types = {
 
 const server = http.createServer((request, response) => {
   try {
-    const urlPath = decodeURIComponent(new URL(request.url, `http://${request.headers.host}`).pathname);
-    const requestPath = urlPath === "/" ? "index.html" : urlPath.replace(/^[/\\]+/, "");
-    const safePath = path.normalize(requestPath).replace(/^(\.\.[/\\])+/, "");
+    const urlPath = decodeURIComponent(
+      new URL(request.url, `http://${request.headers.host}`).pathname
+    );
+
+    const requestPath =
+      urlPath === "/" ? "index.html" : urlPath.replace(/^[/\\]+/, "");
+
+    const safePath = path
+      .normalize(requestPath)
+      .replace(/^(\.\.[/\\])+/, "");
+
     const filePath = path.join(root, safePath);
 
+    // Prevent access outside the project directory
     if (!filePath.startsWith(root)) {
       response.writeHead(403);
       response.end("Forbidden");
@@ -33,8 +42,10 @@ const server = http.createServer((request, response) => {
       }
 
       response.writeHead(200, {
-        "Content-Type": types[path.extname(filePath)] || "application/octet-stream"
+        "Content-Type":
+          types[path.extname(filePath)] || "application/octet-stream"
       });
+
       response.end(content);
     });
   } catch (err) {
@@ -43,6 +54,7 @@ const server = http.createServer((request, response) => {
   }
 });
 
-server.listen(port, "127.0.0.1", () => {
-  console.log(`DemoniX site running at http://127.0.0.1:${port}`);
+// Render requires the web service to listen on 0.0.0.0
+server.listen(port, "0.0.0.0", () => {
+  console.log(`DemoniX site running on 0.0.0.0:${port}`);
 });
