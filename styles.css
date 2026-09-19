@@ -84,6 +84,8 @@ main{overflow:hidden}
 .cta-band h2{margin-bottom:0}.cta-band .eyebrow{margin-bottom:10px}.primary-button.light{background:#fff;color:#16263a;box-shadow:none;white-space:nowrap}.primary-button.light:hover{background:#edf8ff}
 .footer{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1160px;margin:auto;padding:28px;border-top:1px solid var(--line)}
 .footer strong{color:var(--text)}.footer p{margin:3px 0 0;font-size:.86rem}.footer a{color:var(--mint);font-weight:700;text-decoration:none}
+.footer-links{display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px}
+@media(max-width:600px){.footer-links{align-items:flex-start;flex-direction:column}.footer-links a{overflow-wrap:anywhere}}
 @media(max-width:900px){
   .nav{display:none}
   .hero{grid-template-columns:1fr;padding-top:42px;gap:40px}

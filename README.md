@@ -6,6 +6,8 @@ The extension runs local scans after a user click. The web demo has separate opt
 
 The homepage includes a guided feedback form. It does not store or send answers to DemoniX. After a visitor chooses a feedback category and clarity rating, it opens a prefilled GitHub issue draft for the visitor to review and submit. A GitHub account is required. Visitors are asked not to include private messages or personal and financial details.
 
+For direct contact, the homepage links to [demonix.site@gmail.com](mailto:demonix.site@gmail.com) in the footer.
+
 ## Run locally
 
 Run `npm start` and visit `http://127.0.0.1:5175`. The server serves only the homepage, stylesheet, and browser script.
