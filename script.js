@@ -27,17 +27,18 @@ if (feedbackForm) {
     const note = feedbackForm.elements.note.value.trim();
     const title = `[Feedback] ${type}`;
     const body = [
-      "## AI Shield feedback",
-      `Type: ${type}`,
-      `Next step clear: ${clarity}`,
+      "## DemoniX & AI Shield Feedback",
+      `Category: ${type}`,
+      `Guidance clear: ${clarity}`,
       "",
-      "## What could be better?",
-      note || "No additional note.",
+      "## Details",
+      note || "No additional note provided.",
       "",
-      "Please review this draft and remove any personal or financial details before submitting."
+      "---",
+      "Submitted via DemoniX Website. Please verify no sensitive credentials or personal financial data are present."
     ].join("\n");
 
-    const url = new URL("https://github.com/suryathe44/AI_shield/issues/new");
+    const url = new URL("https://github.com/suryathe44/AI_Shield/issues/new");
     url.searchParams.set("title", title);
     url.searchParams.set("body", body);
     window.location.assign(url.toString());
