@@ -1,46 +1,11 @@
-const panel = document.querySelector(".scanner-panel");
-
-if (panel) {
-  panel.addEventListener("pointermove", (event) => {
-    if (event.pointerType === "touch" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const rect = panel.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 8;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * -8;
-
-    panel.style.transform = `perspective(900px) rotateX(${y}deg) rotateY(${x}deg)`;
-  });
-
-  panel.addEventListener("pointerleave", () => {
-    panel.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
-  });
-}
-
-const feedbackForm = document.querySelector("#feedback-form");
-
-if (feedbackForm) {
-  feedbackForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!feedbackForm.reportValidity()) return;
-
-    const type = feedbackForm.elements.type.value;
-    const clarity = feedbackForm.elements.clarity.value;
-    const note = feedbackForm.elements.note.value.trim();
-    const title = `[Feedback] ${type}`;
-    const body = [
-      "## DemoniX & AI Shield Feedback",
-      `Category: ${type}`,
-      `Guidance clear: ${clarity}`,
-      "",
-      "## Details",
-      note || "No additional note provided.",
-      "",
-      "---",
-      "Submitted via DemoniX Website. Please verify no sensitive credentials or personal financial data are present."
-    ].join("\n");
-
-    const url = new URL("https://github.com/suryathe44/AI_Shield/issues/new");
-    url.searchParams.set("title", title);
-    url.searchParams.set("body", body);
-    window.location.assign(url.toString());
-  });
-}
+"use strict";
+const toggle=document.getElementById('menu-toggle'),nav=document.getElementById('mobile-nav');
+function closeMenu(){nav.hidden=true;toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open menu');}
+toggle.addEventListener('click',()=>{nav.hidden=!nav.hidden;toggle.setAttribute('aria-expanded',String(!nav.hidden));toggle.setAttribute('aria-label',nav.hidden?'Open menu':'Close menu');});
+nav.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!nav.hidden){closeMenu();toggle.focus();}});
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{for(const entry of entries)entry.target.classList.toggle('in-view',entry.isIntersecting);},{threshold:0});document.querySelectorAll('.shield-scene').forEach(el=>observer.observe(el));}
+function feedbackUrl(category,clarity,note){const url=new URL('https://github.com/suryathe44/AI_Shield/issues/new');url.searchParams.set('title',`[Feedback] ${category}`);url.searchParams.set('body',['## DemoniX & AI Shield Feedback',`Category: ${category}`,`Guidance clear: ${clarity}`,'','## Details',note.trim().slice(0,500)||'No additional note provided.','','---','Submitted via DemoniX Website. Please verify no sensitive credentials or personal financial data are present.'].join('\n'));return url.toString();}
+const form=document.getElementById('feedback-form'),review=document.getElementById('feedback-review');
+form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const data=new FormData(form),category=String(data.get('type')||''),note=String(data.get('note')||'').trim().slice(0,500);document.getElementById('review-category').textContent=category;document.getElementById('review-note').textContent=note;document.getElementById('review-link').href=feedbackUrl(category,String(data.get('clarity')||''),note);review.hidden=false;document.getElementById('review-link').focus();});
+document.getElementById('review-cancel').addEventListener('click',()=>{review.hidden=true;form.querySelector('[type="submit"]').focus();});
